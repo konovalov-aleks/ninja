@@ -1047,7 +1047,7 @@ int ReadFlags(int* argc, char*** argv,
 
   int opt;
   while (!options->tool &&
-         (opt = getopt_long(*argc, *argv, "d:f:j:k:l:nt:vw:C:h", kLongOptions,
+         (opt = getopt_long(*argc, *argv, "d:f:j:k:l:m:nt:vw:C:h", kLongOptions,
                             NULL)) != -1) {
     switch (opt) {
       case 'd':
@@ -1063,6 +1063,14 @@ int ReadFlags(int* argc, char*** argv,
         if (*end != 0 || value <= 0)
           Fatal("invalid -j parameter");
         config->parallelism = value;
+        break;
+      }
+      case 'm': {
+        char* end;
+        int value = strtol(optarg, &end, 10);
+        if (*end != 0 || value <= 0)
+          Fatal("invalid -m parameter");
+        config->min_parallelism = value;
         break;
       }
       case 'k': {

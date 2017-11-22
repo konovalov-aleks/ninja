@@ -124,7 +124,7 @@ struct CommandRunner {
 
 /// Options (e.g. verbosity, parallelism) passed to a build.
 struct BuildConfig {
-  BuildConfig() : verbosity(NORMAL), dry_run(false), parallelism(1),
+  BuildConfig() : verbosity(NORMAL), dry_run(false), parallelism(1), min_parallelism(0),
                   failures_allowed(1), max_load_average(-0.0f) {}
 
   enum Verbosity {
@@ -135,6 +135,7 @@ struct BuildConfig {
   Verbosity verbosity;
   bool dry_run;
   int parallelism;
+  int min_parallelism;
   int failures_allowed;
   /// The maximum load average we must not exceed. A negative value
   /// means that we do not have any limit.
